@@ -53,7 +53,7 @@ Now in the original paper the authors mentioned to remove the batch normalizatio
 
 Another change I made in the original architecture is replacing the nearest upsampling proceedure with the pixel shuffle, which helped a lot to produce highly detailed outputs given the size of the model.
 
-The discriminator is made up of blocks of classifc convolution layer followed by batch normalization followed by leaky relu non linearty.
+The discriminator is made up of blocks of classifc convolution layer followed by batch normalization followed by leaky relu non linearity.
 
 # Relativistic Discriminator
 
@@ -80,7 +80,7 @@ Generator's adversarial loss:
 
 Original perceptual loss introduced in SRGAN paper combines the adversarial loss and the content loss obtained from the features of final convolution layers of the VGG Net.
 
-Effectiveness of perceptual loss if found to be more increased  by constraining on features before activation rather than after activation as practiced in SRGAN.
+Effectiveness of perceptual loss if found increased by constraining on features before activation rather than after activation as practiced in SRGAN.
 
 To make the Perceptual loss more effective, I additionally added the preactivation features disparity from both shallow and deep layers, making the generator produce better results.
 
@@ -88,7 +88,7 @@ In addition to content loss and relativistic adversarial optimization, a simple 
 
 Now based on my experiments I found it really hard for the generator to produce highly detailed outputs when its also minimizing the pixel loss (I'm imputing this observation to the fact that my model is very small).
 
-This is a bit surprising because an optimizing an additional objective function which has same optima should help speeing up the training. My interpretation is since super resolution is not a one to one matching, as multiple results are there for a single low resolution patch (more on patch size below), so forcing the generator to converge to a single output would cause the generator to not produce detailed but instead the average of all those possible outputs.
+This is a bit surprising because optimizing an additional objective function which has same optima should help speeding up the training. My interpretation is since super resolution is not a one to one matching, as multiple results are there for a single low resolution patch (more on patch size below), so forcing the generator to converge to a single output would cause the generator to not produce detailed but instead the average of all those possible outputs.
 
 So I tried reducing the pixel loss weight coefficient down to 1e-2 to 1e-4 as described in the paper, and then compared the results with the generator trained without any pixel loss, and found that pixel loss has no significant visual improvements. So given my constrained training environment (Google Colab), I decided not to utilize the pixel loss as one of the part of generator's loss.
 
@@ -99,7 +99,7 @@ So here's the generator's final loss:
 
 # Patch size affect
 
-Ideally larger the patch size better the adversarial training hence better the results, since an enlarged receptive field helps the network to capture more semantic information. Therefore the paper uses 96x96 to 192x192 as the patch size resolution, but since I was constrained to utilize Google Colab, my patch size was only 32x32 😶, and that too with batch size of 8.
+Ideally larger the patch size better the adversarial training hence better the results, since an enlarged receptive field helps both the models to capture more semantic information. Therefore the paper uses 96x96 to 192x192 as the patch size resolution, but since I was constrained to utilize Google Colab, my patch size was only 32x32 😶, and that too with batch size of 8.
 
 # Multiple compression methods
 
@@ -107,7 +107,7 @@ The idea is to make the generator independent of the compression that is applied
 
 For this I randomly applied the nearest, bilinear and bicubic compressions on all the data points in the dataset every time a batch is processed.
 
-# Vaidation Results after ~500 epochs
+# Validation Results after ~500 epochs
 
 |<h2>Loss type</h2>|Value|
 |--|--|
