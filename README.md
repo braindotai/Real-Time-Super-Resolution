@@ -28,7 +28,7 @@ So for me the main goal with this project wasn't just to create yet another supe
 
 With this goal in mind, I tried adopting the modern super resolution frameworks such as relativistic adversarial training, and content loss optimization (I've mainly followed the [ESRGAN](https://arxiv.org/abs/1809.00219), with few changes in the objective function), and finally was able to create a **model of size 5MB!!!**
 
-# Usage
+# API Usage
 
 ```python
 from inference import enhance_image
@@ -39,6 +39,19 @@ enhance_image(
     visualize, # <whether to visualize the outputs or not>
     size, # <plot size>,
     )
+```
+
+# CLI Usage
+
+```
+usage: inference.py [-h] [--lr-path LR_PATH] [--sr-path SR_PATH]
+
+Super Resolution for Real Time Image Enhancement
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --lr-path LR_PATH  Path to the low resolution image.
+  --sr-path SR_PATH  Output path where the enhanced image would be saved.
 ```
 
 # Model architectures
