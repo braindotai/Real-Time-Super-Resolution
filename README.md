@@ -1,5 +1,7 @@
 # Super Resolution for Real Time Image Enhancement
 
+<img src="https://img.shields.io/badge/LICENCE-MIT-green.svg?colorA=0000&colorB=22c716&style=for-the-badge"/>
+    
 <div align="center">
     <img src='./figures/wall.png' width="100%">
 </div>
